@@ -1,11 +1,14 @@
-import Navbar from './components/Navbar';
-import LoginPage from './pages/LoginPage.js'
+// import Navbar from './components/Navbar';
+import ItemsPage from './pages/ItemsPage.js';
+// import LoginPage from './pages/LoginPage.js'
 
 function App() {
   return (
-    <div>
-      <LoginPage />
-    </div>
+    <>
+     {/* <LoginPage /> */}
+     <ItemsPage/>
+    </>
+     
   );
 }
 
