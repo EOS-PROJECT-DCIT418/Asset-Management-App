@@ -39,11 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     #created apps
     'apps.Bookings',
-    'apps.Collections',
     'apps.Devices',
     'apps.Issues',
     'apps.Items',
-    'apps.Locations',
     'apps.Reminders',
     'apps.Users',
 ]
