@@ -1,15 +1,13 @@
 import React from 'react';
-import Navbar from '../components/Navbar.js'
-import PageTitle from '../components/PageTitle.js';
-
+import Navbar from '../components/Navbar.js';
 import ListContainer from '../components/ListContainter.js';
+import AddSection from '../components/AddSection.js';
 
 const Collections = () => {
     return(
         <>
            <Navbar />
-           <PageTitle title="Collections" />
-           
+           <AddSection title="Collections" />
            <ListContainer title="Collections"></ListContainer>
         </>
 

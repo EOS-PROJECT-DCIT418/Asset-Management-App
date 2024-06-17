@@ -117,7 +117,7 @@ const DesignWrapper = styled.div`
    align-items: center;
 `
 
-const PageTitle = (props) => {
+const AddSection = (props) => {
     const [inputValue, setInputValue] = useState('');
     const [isSaveButtonEnabled, setIsSaveButtonEnabled] = useState(false);
     const [isVisible, setIsVisible] = useState(false); // new state variable
@@ -154,24 +154,19 @@ const PageTitle = (props) => {
             </div>
         </TitleWrapper>
 
-<InputWrapper style={{ display: isVisible ? 'flex' : 'none' }}>
-<InputDiv>
-  <DesignWrapper>
-    <Design></Design>
-  </DesignWrapper>
-  <Input
-    type="text"
-    placeholder="Enter text here"
-    value={inputValue}
-    onChange={handleInputChange}
-  />
-  <SaveButton enabled={isSaveButtonEnabled}>Save</SaveButton>
-  <CancelButton onClick={handleCancelButtonClick}>Cancel</CancelButton>
-</InputDiv>
-</InputWrapper>
+       <InputWrapper style={{ display: isVisible ? 'flex' : 'none' }}>
+         <InputDiv>
+            <DesignWrapper>
+                <Design></Design>
+            </DesignWrapper>
+            <Input type="text" placeholder="Enter text here" value={inputValue} onChange={handleInputChange}/>
+            <SaveButton enabled={isSaveButtonEnabled}>Save</SaveButton>
+            <CancelButton onClick={handleCancelButtonClick}>Cancel</CancelButton>
+         </InputDiv>
+        </InputWrapper>
 
-</>
-    )
+       </>
+      )
 }
 
-export default PageTitle;
+export default AddSection;
