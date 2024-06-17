@@ -40,6 +40,11 @@ const Button = styled.button`
    color: #fff;
    background: #EFC000;
    padding: 0.6em 0.6em;
+   cursor: pointer;
+
+   &:hover{
+     background : #EFC444;
+   }
 `
 
 const PageTitle = (props) => {

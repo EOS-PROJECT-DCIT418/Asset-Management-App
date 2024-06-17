@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const Wrapper = styled.div`
    height: 104px;
    border-radius: 9px;
-   background: #FFF;
+   background: #FFFFFF;
    margin: 2em 3.5em;
    padding: 1em;
    display: flex;
@@ -25,25 +25,28 @@ const Input = styled.input`
    border: 1px solid #D9D9D9;
    background: #FFF;
    margin: 1em;
-   height: 2.5em;
+   // height: 2.3em;
+   padding: 0.5em;
 `
 const SaveButton = styled.button`
    border-radius: 10px;
    background: rgba(162, 162, 162, 0.54);
    color: #fff;
-   height: 36px;
-   padding: 8px 25px;
+   // height: 2.3em;
+   padding: 0.4em 0.6em;
    margin-left: 0em;
    border: none;
+   cursor: pointer;
 `
 const CancelButton = styled.button`
    border-radius: 15px;
    background: transparent;
    color: #EFC000;
-   height: 36px;
-   padding: 8px 15px;
+   // height: 2.3em;
+   padding: 0.8em;
    margin: 0em;
    border: none;
+   cursor: pointer;
 
 `
 
@@ -63,6 +66,7 @@ const DesignWrapper = styled.div`
    align-items: center;
 `
 
+
 const InputSection = () => {
     return(
         <Wrapper>
@@ -70,7 +74,7 @@ const InputSection = () => {
                <DesignWrapper>
                    <Design></Design>
                </DesignWrapper>
-               <Input></Input>
+               <Input type='text' placeholder='Enter text here'/>
                <SaveButton>Save</SaveButton>
                <CancelButton>Cancel</CancelButton>
             </InputDiv>
