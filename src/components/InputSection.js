@@ -32,11 +32,16 @@ const SaveButton = styled.button`
    border-radius: 10px;
    background: rgba(162, 162, 162, 0.54);
    color: #fff;
-   // height: 2.3em;
    padding: 0.4em 0.6em;
    margin-left: 0em;
    border: none;
    cursor: pointer;
+   ${({ enabled }) =>
+      enabled &&
+      `
+        background: #EFC000; /* green color when enabled */
+        color: #fff;
+      `}
 `
 const CancelButton = styled.button`
    border-radius: 15px;
@@ -68,14 +73,28 @@ const DesignWrapper = styled.div`
 
 
 const InputSection = () => {
+   const [inputValue, setInputValue] = React.useState('');
+  const [isSaveButtonEnabled, setIsSaveButtonEnabled] = React.useState(false);
+
+  const handleInputChange = (event) => {
+    const newValue = event.target.value;
+    setInputValue(newValue);
+    if (newValue.length > 0) {
+      setIsSaveButtonEnabled(true);
+    } else {
+      setIsSaveButtonEnabled(false);
+    }
+  };
+
+
     return(
         <Wrapper>
             <InputDiv>
                <DesignWrapper>
                    <Design></Design>
                </DesignWrapper>
-               <Input type='text' placeholder='Enter text here'/>
-               <SaveButton>Save</SaveButton>
+               <Input type="text" placeholder="Enter text here" value={inputValue} onChange={handleInputChange} />
+               <SaveButton disabled={!isSaveButtonEnabled}>Save</SaveButton>
                <CancelButton>Cancel</CancelButton>
             </InputDiv>
         </Wrapper>
