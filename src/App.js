@@ -13,7 +13,5 @@ function App() {
         <Route path="/bookings" element={<Bookings />} />
       </Routes>
     </Router>
-  );
-}
 
 export default App;
