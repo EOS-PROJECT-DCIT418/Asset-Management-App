@@ -16,7 +16,7 @@ const HeaderContainer = styled.div`
 `;
 
 const SearchInput = styled.input`
-  width: 300px;
+  width: 50%;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;

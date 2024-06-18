@@ -34,8 +34,8 @@ const CardItem = styled.div`
   padding: 10px 5px;
 
   &:hover {
-    background-color: #333;
-    color: #fff;
+    background-color: #F3F4F6;
+    color: #000;
   }
 
   &:last-child {

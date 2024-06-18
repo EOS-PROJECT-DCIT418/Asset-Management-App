@@ -13,7 +13,7 @@ const Layout = styled.div`
 
 const Container = styled.div`
   min-height: 100vh;
-  background-color: #A3A3A3;
+  background-color: #ECECEC;
 `;
 
 const SidebarContainer = styled.div`
