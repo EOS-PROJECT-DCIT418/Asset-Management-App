@@ -1,15 +1,17 @@
-// import Navbar from './components/Navbar';
-import ItemsPage from './pages/ItemsPage.js';
-// import LoginPage from './pages/LoginPage.js'
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Navbar from './components/Navbar';
+import LoginPage from './pages/LoginPage';
+import Bookings from './pages/Bookings';
 
 function App() {
   return (
-    <>
-     {/* <LoginPage /> */}
-     <ItemsPage/>
-    </>
-     
-  );
-}
+    <Router>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<LoginPage />} />
+        <Route path="/bookings" element={<Bookings />} />
+      </Routes>
+    </Router>
 
 export default App;
