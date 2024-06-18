@@ -5,11 +5,11 @@ const LoginPage = () => {
     <div className='wrapper'>
       <form action=''>
        
-        <h1>Welcome back</h1>
-        <h3>Please enter your credentials to sign in</h3>
+        <h1>Welcome Back!</h1>
+        <h4>Please enter your credentials to sign in</h4>
         <div className="input-box">
           <label> Staff ID</label>
-          <input type="text" placeholder='Username' required/>
+          <input type="text" placeholder='Eg. GCB108976' required/>
         </div>
         <div className="input-box">
           <label> Password </label>
@@ -23,9 +23,7 @@ const LoginPage = () => {
 
         <button type="submit">Login</button>
 
-        <div className="register-link">
-          <p>Don't have an account? <a href="#">Register</a></p>
-        </div>
+        
       </form>
     </div>
     
