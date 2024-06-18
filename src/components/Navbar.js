@@ -53,7 +53,7 @@ const ProfileText = styled.div`
 const Navbar = () => {
   return (
     <NavbarContainer>
-      <MenuContainer mode="horizontal" defaultSelectedKeys={['1']}>
+      <MenuContainer mode="horizontal" defaultSelectedKeys={['5']}>
         <Menu.Item key="1">Items</Menu.Item>
         <Menu.Item key="2">Collections</Menu.Item>
         <Menu.Item key="3">Locations</Menu.Item>

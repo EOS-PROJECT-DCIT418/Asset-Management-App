@@ -28,7 +28,7 @@ const MainContent = () => {
   return (
     <MainContentContainer>
       <MessageContainer>
-        <MessageImage src="path_to_your_image.png" alt="No bookings" />
+        <MessageImage src="/public/images/bookings.svg" alt="No bookings" />
         <MessageText>Uh Oh! You have no bookings to display here</MessageText>
       </MessageContainer>
     </MainContentContainer>
