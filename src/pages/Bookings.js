@@ -32,7 +32,6 @@ const ContentContainer = styled.div`
 const Bookings = () => {
   return (
     <Container>
-      <Navbar />
       <Layout>
         <SidebarContainer>
           <Sidebar />

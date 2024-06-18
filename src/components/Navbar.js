@@ -1,5 +1,6 @@
 import React from 'react';
 import { Layout, Menu, Typography } from 'antd';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const { Header } = Layout;
@@ -23,10 +24,10 @@ const MenuContainer = styled(Menu)`
     color: #000 !important;
   }
   .ant-menu-item-selected::after {
-    border-bottom-color: #000 !important
+    border-bottom-color: #000 !important;
   }
   .ant-menu-item:hover::after {
-    border-bottom-color: #000 !important
+    border-bottom-color: #000 !important;
   }
 `;
 
@@ -53,16 +54,16 @@ const ProfileText = styled.div`
 const Navbar = () => {
   return (
     <NavbarContainer>
-      <MenuContainer mode="horizontal" defaultSelectedKeys={['5']}>
-        <Menu.Item key="1">Items</Menu.Item>
-        <Menu.Item key="2">Collections</Menu.Item>
-        <Menu.Item key="3">Locations</Menu.Item>
-        <Menu.Item key="4">Reminders</Menu.Item>
-        <Menu.Item key="5">Bookings</Menu.Item>
-        <Menu.Item key="6">Issues</Menu.Item>
-        <Menu.Item key="7">Devices</Menu.Item>
-        <Menu.Item key="8">Reports</Menu.Item>
-        <Menu.Item key="9">Users</Menu.Item>
+      <MenuContainer mode="horizontal" defaultSelectedKeys={['1']}>
+        <Menu.Item key="1"><Link to="/">Items</Link></Menu.Item>
+        <Menu.Item key="2"><Link to="/collections">Collections</Link></Menu.Item>
+        <Menu.Item key="3"><Link to="/locations">Locations</Link></Menu.Item>
+        <Menu.Item key="4"><Link to="/reminders">Reminders</Link></Menu.Item>
+        <Menu.Item key="5"><Link to="/bookings">Bookings</Link></Menu.Item>
+        <Menu.Item key="6"><Link to="/issues">Issues</Link></Menu.Item>
+        <Menu.Item key="7"><Link to="/devices">Devices</Link></Menu.Item>
+        <Menu.Item key="8"><Link to="/reports">Reports</Link></Menu.Item>
+        <Menu.Item key="9"><Link to="/users">Users</Link></Menu.Item>
       </MenuContainer>
       <ProfileContainer>
         <IconImage src='/icons/settings.svg' alt="Settings Icon" />

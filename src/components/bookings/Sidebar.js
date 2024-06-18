@@ -49,9 +49,10 @@ const ExportHistoryCardItem = styled(CardItem)`
   align-items: center;
 `;
 
-const ExportHistoryIcon = styled.span`
-  font-size: 16px;
-  color: #000;
+const IconImage = styled.img`
+  width: 22px;
+  height: 22px;
+  margin-right: 5px; 
 `;
 
 const BookingsCard = () => (
@@ -78,7 +79,7 @@ const RequestsCard = () => (
 const ExportHistoryCard = () => (
   <Card>
     <ExportHistoryCardItem>
-      Export History <ExportHistoryIcon>&#9654;</ExportHistoryIcon>
+      Export History <IconImage src='/icons/next.svg' alt="Go Icon" />
     </ExportHistoryCardItem>
   </Card>
 );
