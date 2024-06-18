@@ -5,9 +5,14 @@ const HeaderContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px;
-  background-color: #fff;
-  box-shadow: 0px 4px 2px -2px gray;
+  padding: 20px 0;
+  background-color: transparent;
+  margin-bottom: 20px;
+  div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
 `;
 
 const SearchInput = styled.input`
@@ -32,9 +37,6 @@ const Header = () => {
     <HeaderContainer>
       <SearchInput type="text" placeholder="Search..." />
       <div>
-        <HeaderButton>List</HeaderButton>
-        <HeaderButton>Calendar</HeaderButton>
-        <HeaderButton>Export</HeaderButton>
         <HeaderButton>Create Booking</HeaderButton>
       </div>
     </HeaderContainer>

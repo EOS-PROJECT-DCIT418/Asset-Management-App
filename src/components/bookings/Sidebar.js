@@ -2,32 +2,93 @@ import React from 'react';
 import styled from 'styled-components';
 
 const SidebarContainer = styled.div`
-  width: 250px;
-  background-color: #f8f9fa;
+  width: 100%;
+  background-color: none;
   padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 `;
 
-const SidebarItem = styled.div`
-  margin-bottom: 10px;
-  font-size: 18px;
-  cursor: pointer;
+const Card = styled.div`
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 `;
+
+const CardHeader = styled.div`
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+`;
+
+const CardItem = styled.div`
+  margin-bottom: 8px;
+  font-size: 16px;
+  color: #333;
+  cursor: pointer;
+  padding: 10px 5px;
+
+  &:hover {
+    background-color: #333;
+    color: #fff;
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+`;
+
+const ExportHistoryCardItem = styled(CardItem)`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const ExportHistoryIcon = styled.span`
+  font-size: 16px;
+  color: #000;
+`;
+
+const BookingsCard = () => (
+  <Card>
+    <CardHeader>Bookings</CardHeader>
+    <CardItem>All</CardItem>
+    <CardItem>Booked</CardItem>
+    <CardItem>Checked out</CardItem>
+    <CardItem>Completed</CardItem>
+    <CardItem>Overdue</CardItem>
+    <CardItem>Missed</CardItem>
+  </Card>
+);
+
+const RequestsCard = () => (
+  <Card>
+    <CardHeader>Requests</CardHeader>
+    <CardItem>Pending Approval</CardItem>
+    <CardItem>Approved Bookings</CardItem>
+    <CardItem>Rejected Bookings</CardItem>
+  </Card>
+);
+
+const ExportHistoryCard = () => (
+  <Card>
+    <ExportHistoryCardItem>
+      Export History <ExportHistoryIcon>&#9654;</ExportHistoryIcon>
+    </ExportHistoryCardItem>
+  </Card>
+);
 
 const Sidebar = () => {
   return (
     <SidebarContainer>
-      <h3>Bookings</h3>
-      <SidebarItem>All</SidebarItem>
-      <SidebarItem>Booked</SidebarItem>
-      <SidebarItem>Checked out</SidebarItem>
-      <SidebarItem>Completed</SidebarItem>
-      <SidebarItem>Overdue</SidebarItem>
-      <SidebarItem>Missed</SidebarItem>
-      <h3>Requests</h3>
-      <SidebarItem>Pending Approval</SidebarItem>
-      <SidebarItem>Approved Bookings</SidebarItem>
-      <SidebarItem>Rejected Bookings</SidebarItem>
-      <SidebarItem>Export History</SidebarItem>
+      <BookingsCard />
+      <RequestsCard />
+      <ExportHistoryCard />
     </SidebarContainer>
   );
 };

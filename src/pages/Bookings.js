@@ -1,27 +1,32 @@
 import React from 'react';
 import styled from 'styled-components';
-import Sidebar from './Sidebar';
-import Header from './Header';
-import MainContent from './MainContent';
-import Navbar from './Navbar';
-import { Layout } from 'antd';
+import Sidebar from '../components/bookings/Sidebar';
+import Header from '../components/bookings/Header';
+import MainContent from '../components/bookings/MainContent';
+import Navbar from '../components/Navbar';
 
-const { Content } = Layout;
+const Layout = styled.div`
+    display: flex;
+    padding: 30px;
+    align-items: stretch;
+`;
 
-const Container = styled(Layout)`
+const Container = styled.div`
   min-height: 100vh;
+  background-color: #A3A3A3;
 `;
 
 const SidebarContainer = styled.div`
-  width: 250px;
-  background-color: #f8f9fa;
+  width: 20%;
+  background-color: transparent;
 `;
 
-const ContentContainer = styled(Content)`
+const ContentContainer = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1;
   padding: 0 20px;
+  width: 80%;
 `;
 
 const Bookings = () => {
