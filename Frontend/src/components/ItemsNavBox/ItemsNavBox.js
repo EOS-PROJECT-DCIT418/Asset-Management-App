@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { Container, Heading, NavList, NavItem, Button, PopupContainer, PopupForm, CloseButton } from './ItemsNavBox.styled';
 
-const ItemsNavBox = () => {
+const ItemsNavBox = ({ addItem }) => {
   const [isPopupVisible, setPopupVisible] = useState(false);
   const [itemName, setItemName] = useState('');
   const [serial_number, setSerialNumber] = useState('');
@@ -31,7 +31,7 @@ const ItemsNavBox = () => {
 
     try {
       const response = await axios.post('http://localhost:8000/api/items/', itemData);
-      console.log(response);
+      addItem(response.data); // Add the new item to the items state
       handleClosePopup();
       setItemName('');
       setSerialNumber('');
@@ -47,9 +47,9 @@ const ItemsNavBox = () => {
     <Container>
       <Heading>Items</Heading>
       <NavList className='NavBoxlist'>
-        <NavItem><div>All Items</div><div>0</div></NavItem>
-        <NavItem><div>Tagged Items</div><div>0</div></NavItem>
-        <NavItem><div>Untagged Items</div><div>0</div></NavItem>
+        <NavItem><div>All Items</div><div>{/* Update with actual count */}</div></NavItem>
+        <NavItem><div>Tagged Items</div><div>{/* Update with actual count */}</div></NavItem>
+        <NavItem><div>Untagged Items</div><div>{/* Update with actual count */}</div></NavItem>
       </NavList>
       <Button onClick={handleButtonClick}>Add New Item</Button>
       {isPopupVisible && (
@@ -81,7 +81,7 @@ const ItemsNavBox = () => {
                 Select Location:
                 <select value={location} onChange={(e) => setLocation(parseInt(e.target.value))}>
                   <option value={1}>Accra</option>
-                  <option value={2}>Location 2</option>
+                  <option value={2}>Kumasi</option>
                 </select>
               </label>
               <button type="submit">Submit</button>
