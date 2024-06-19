@@ -71,7 +71,6 @@ const Input = styled.input`
    border: 1px solid #D9D9D9;
    background: #FFF;
    margin: 1em;
-   // height: 2.3em;
    padding: 0.5em;
 `
 const SaveButton = styled.button`
@@ -85,7 +84,7 @@ const SaveButton = styled.button`
    ${({ enabled }) =>
       enabled &&
       `
-        background: #EFC000; /* green color when enabled */
+        background: #EFC000; 
         color: #fff;
       `}
 `
@@ -93,7 +92,6 @@ const CancelButton = styled.button`
    border-radius: 15px;
    background: transparent;
    color: #EFC000;
-   // height: 2.3em;
    padding: 0.8em;
    margin: 0em;
    border: none;
@@ -120,7 +118,7 @@ const DesignWrapper = styled.div`
 const AddSection = (props) => {
     const [inputValue, setInputValue] = useState('');
     const [isSaveButtonEnabled, setIsSaveButtonEnabled] = useState(false);
-    const [isVisible, setIsVisible] = useState(false); // new state variable
+    const [isVisible, setIsVisible] = useState(false); 
  
     const handleInputChange = (event) => {
      const newValue = event.target.value;
