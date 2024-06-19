@@ -134,6 +134,8 @@ const AddSection = (props) => {
  
    const handleCancelButtonClick = () => {
      setIsVisible(false); // hide the InputSection when Cancel button is clicked
+     setInputValue('');
+     setIsSaveButtonEnabled(false)
    };
 
     const handleAddButtonClick = () => {
