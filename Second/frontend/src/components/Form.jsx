@@ -34,28 +34,47 @@ function Form({ route, method }) {
     };
 
     return (
-        <form onSubmit={handleSubmit} className="form-container">
-            <h1>{name}</h1>
-            <input
-                className="form-input"
-                type="text"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                placeholder="Username"
-            />
-            <input
-                className="form-input"
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="Password"
-            />
-            {/* {loading && <LoadingIndicator />} */}
-            <button className="form-button" type="submit">
-                {name}
-            </button>
-        </form>
-    );
+        <div className='login-wrapper'>
+          <div className='wrapper'>
+            <form onSubmit={handleSubmit}>
+              <h1>Welcome Back!</h1>
+              <h4>Please enter your credentials to sign in</h4>
+              <div className="input-box">
+                <label>Staff ID</label>
+                <input
+                  type="text"
+                  name="id"
+                  placeholder='Eg. GCB108976'
+                  required
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                />
+
+              </div>
+              <div className="input-box">
+                <label>Password</label>
+                <input
+                  type="password"
+                  name="password"
+                  placeholder='Password'
+                  required
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </div>
+    
+              <div className="remember-forgot">
+                <label>
+                  <input type="checkbox" /> Remember me
+                </label>
+                <a href="#">Forgot password?</a>
+              </div>
+    
+              <button type="submit">{name}</button>
+            </form>
+          </div>
+        </div>
+      );
 }
 
 export default Form
