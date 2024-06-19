@@ -8,7 +8,7 @@ import ItemList from '../components/ItemsList/ItemList';
 const ItemsPage = () => {
   return (
     <>
-     <Navbar/>
+     {/* <Navbar/> */}
      <ItemsNavBox/>
       <CollectionFilter/> 
       <LocationFilter/> 

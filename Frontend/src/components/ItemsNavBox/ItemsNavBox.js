@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Container, Heading, NavList, NavItem, Button, PopupContainer, PopupForm, CloseButton } from './ItemsNavBox.styled';
 
@@ -9,6 +9,21 @@ const ItemsNavBox = () => {
   const [description, setDescription] = useState('');
   const [collection, setCollection] = useState(2); // Default to Collection 2
   const [location, setLocation] = useState(1); // Default to Location 1
+  const [itemCount, setItemCount] = useState(0);
+
+  // Fetch the current item count when the component mounts
+  useEffect(() => {
+    const fetchItemCount = async () => {
+      try {
+        const response = await axios.get('http://localhost:8000/api/items/count/');
+        setItemCount(response.data.count);
+      } catch (error) {
+        console.error('Error fetching item count:', error);
+      }
+    };
+
+    fetchItemCount();
+  }, []);
 
   const handleButtonClick = () => {
     setPopupVisible(true);
@@ -38,6 +53,7 @@ const ItemsNavBox = () => {
       setDescription('');
       setCollection(2);
       setLocation(1);      
+      setItemCount(prevCount => prevCount + 1);
     } catch (error) {
       console.error('Error adding item:', error);
     }
@@ -47,9 +63,9 @@ const ItemsNavBox = () => {
     <Container>
       <Heading>Items</Heading>
       <NavList className='NavBoxlist'>
-        <NavItem><div>All Items</div><div>0</div></NavItem>
-        <NavItem><div>Tagged Items</div><div>0</div></NavItem>
-        <NavItem><div>Untagged Items</div><div>0</div></NavItem>
+        <NavItem><div>All Items</div><div>{itemCount}</div></NavItem>
+        {/* <NavItem><div>Tagged Items</div><div>0</div></NavItem>
+        <NavItem><div>Untagged Items</div><div>0</div></NavItem> */}
       </NavList>
       <Button onClick={handleButtonClick}>Add New Item</Button>
       {isPopupVisible && (
