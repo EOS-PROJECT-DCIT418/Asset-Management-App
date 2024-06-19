@@ -14,6 +14,8 @@ from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+# Define the path to frontend build directory
+FRONTEND_BUILD_DIR = BASE_DIR / 'Frontend' / 'src'
 
 
 # Quick-start development settings - unsuitable for production
@@ -31,6 +33,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'corsheaders',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -44,7 +47,7 @@ INSTALLED_APPS = [
     'apps.Items',
     'apps.Reminders',
     'apps.Users',
-    'rest_framework',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
@@ -55,14 +58,31 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware'
 ]
 
-ROOT_URLCONF = 'Management.urls'
+REST_FRAMEWORK = {'DEFAULT_PERMISSION_CLASSES': [
+    'rest_framework.permissions.AllowAny'
+]}
+CORS_ORIGIN_ALLOW_ALL = True
 
+ROOT_URLCONF = 'Management.urls'
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+]
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_METHODS = [
+    'GET',
+    'POST',
+    'DELETE',
+    'OPTIONS'
+]
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            str(FRONTEND_BUILD_DIR),  # Include frontend templates directory
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -123,7 +143,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = 'pages/'
+
+
+# Add frontend build directory to STATICFILES_DIRS
+STATICFILES_DIRS = [
+    str(FRONTEND_BUILD_DIR / 'pages'),
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field

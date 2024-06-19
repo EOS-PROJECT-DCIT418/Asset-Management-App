@@ -20,11 +20,11 @@ class Location(models.Model):
         return self.name #returns actual Collection name
     
 class Item(models.Model):
-    collection = models.ForeignKey(Collection, related_name='items',on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
+    serial_number = models.CharField(max_length=50, default='0000000000')
     description = models.TextField(blank=True, null=True)
-    available = models.BooleanField(default=False)
-    location = models.ForeignKey(Location, on_delete=models.CASCADE)
+    collection = models.ForeignKey(Collection, related_name='items',on_delete=models.CASCADE, default=2)
+    location = models.ForeignKey(Location, on_delete=models.CASCADE, default=1)
     
     def __str__(self) -> str:
         return self.name

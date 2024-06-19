@@ -15,15 +15,23 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, re_path, include
+from django.views.generic import TemplateView
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('bookings/', include('apps.Bookings.urls')),
-    path('devices/', include('apps.Devices.urls')),
-    path('issues/', include('apps.Issues.urls')),
-    path('items/', include('apps.Items.urls')),
-    path('reminders/', include('apps.Reminders.urls')),
-    path('users/', include('apps.Users.urls')),
+    path('api/bookings/', include('apps.Bookings.urls')),
+    path('api/devices/', include('apps.Devices.urls')),
+    path('api/issues/', include('apps.Issues.urls')),
+    path('api/items/', include('apps.Items.urls')),
+    path('api/reminders/', include('apps.Reminders.urls')),
+    path('api/users/', include('apps.Users.urls')),
+
+    # Route all other URLs to React frontend
+    re_path(r'^.*$', TemplateView.as_view(template_name='index.html')),
 
 ]
+# Serve static files during production (for development, use Django's static serve)
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
