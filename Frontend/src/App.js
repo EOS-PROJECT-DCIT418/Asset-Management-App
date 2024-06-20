@@ -4,6 +4,7 @@ import Navbar from './components/Navbar';
 import LoginPage from './pages/LoginPage';
 import Bookings from './pages/Bookings';
 import ItemsPage from './pages/ItemsPage';
+// import CollectionsPage from './pages/CollectionsPage';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -20,6 +21,7 @@ function App() {
           <Routes>
             <Route path="/items" element={<ItemsPage />} />
             <Route path="/bookings" element={<Bookings />} />
+            {/* <Route path="/collections" element={<CollectionsPage />} />  */}
           </Routes>
         </>
       ) : (

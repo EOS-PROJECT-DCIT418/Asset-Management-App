@@ -7,8 +7,8 @@ const ItemsNavBox = ({ addItem }) => {
   const [itemName, setItemName] = useState('');
   const [serial_number, setSerialNumber] = useState('');
   const [description, setDescription] = useState('');
-  const [collection, setCollection] = useState(2); // Default to Collection 2
-  const [location, setLocation] = useState(1); // Default to Location 1
+  const [collection, setCollection] = useState(1); // Default to Collection 1
+  const [location, setLocation] = useState(10); // Default to Location 10
   const [itemCount, setItemCount] = useState(0);
   const [collections, setCollections] = useState([]);
   const [locations, setLocations] = useState([]);
@@ -61,8 +61,8 @@ const ItemsNavBox = ({ addItem }) => {
       setItemName('');
       setSerialNumber('');
       setDescription('');
-      setCollection(2);
-      setLocation(1);      
+      setCollection(1);
+      setLocation(10);      
       setItemCount(prevCount => prevCount + 1);
     } catch (error) {
       console.error('Error adding item:', error);

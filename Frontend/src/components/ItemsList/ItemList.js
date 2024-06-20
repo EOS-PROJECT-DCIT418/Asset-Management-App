@@ -19,7 +19,7 @@ const ItemList = ({ items }) => {
               <TableCell>{item.name}</TableCell>
               <TableCell>{item.serial_number}</TableCell>
               <TableCell>{item.collection.name}</TableCell>
-              <TableCell>{item.location.location}</TableCell>
+              <TableCell>{item.location.name}, {item.location.city}</TableCell>
             </TableRow>
           ))}
         </TableBody>
