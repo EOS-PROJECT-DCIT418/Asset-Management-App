@@ -29,6 +29,8 @@ urlpatterns = [
     path('api/reminders/', include('apps.Reminders.urls')),
     path('api/login/', include('apps.Login.urls')),
     path('api/users/', include('apps.Users.urls')),
+    path('api/collections/', include('apps.Collections.urls')),
+    path('api/locations/', include('apps.Locations.urls')),
 
     # Route all other URLs to React frontend
     re_path(r'^.*$', TemplateView.as_view(template_name='index.html')),

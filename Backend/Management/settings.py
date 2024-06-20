@@ -47,6 +47,8 @@ INSTALLED_APPS = [
     'apps.Items',
     'apps.Reminders',
     'apps.Users',
+    'apps.Collections',
+    'apps.Locations',
     'rest_framework'
 ]
 

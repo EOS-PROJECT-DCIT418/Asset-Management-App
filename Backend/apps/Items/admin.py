@@ -1,7 +1,7 @@
 from django.contrib import admin
-from .models import Item,Location,Collection
+from .models import Item
 
 # Register your models here.
 admin.site.register(Item)
-admin.site.register(Collection)
-admin.site.register(Location)
+# admin.site.register(Collection)
+# admin.site.register(Location)
