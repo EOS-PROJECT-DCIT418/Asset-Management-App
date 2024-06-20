@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import LoginPage from './pages/LoginPage';
@@ -6,14 +6,28 @@ import Bookings from './pages/Bookings';
 import ItemsPage from './pages/ItemsPage';
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const handleLogin = () => {
+    setIsLoggedIn(true);
+  };
+
   return (
     <Router>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<LoginPage />} />
-        <Route path="/bookings" element={<Bookings />} />
-        <Route path="/items" element={<ItemsPage />} />
-      </Routes>
+      {isLoggedIn ? (
+        <>
+          <Navbar />
+          <Routes>
+            <Route path="/items" element={<ItemsPage />} />
+            <Route path="/bookings" element={<Bookings />} />
+          </Routes>
+        </>
+      ) : (
+        <Routes>
+          <Route path="/login" element={<LoginPage onLogin={handleLogin} />} />
+          <Route path="*" element={<LoginPage onLogin={handleLogin} />} />
+        </Routes>
+      )}
     </Router>
   );
 }

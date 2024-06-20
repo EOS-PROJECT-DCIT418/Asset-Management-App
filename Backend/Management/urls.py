@@ -27,7 +27,7 @@ urlpatterns = [
     path('api/issues/', include('apps.Issues.urls')),
     path('api/items/', include('apps.Items.urls')),
     path('api/reminders/', include('apps.Reminders.urls')),
-    # path('api.login/', include('apps.Login.urls')),
+    path('api/login/', include('apps.Login.urls')),
     path('api/users/', include('apps.Users.urls')),
 
     # Route all other URLs to React frontend
