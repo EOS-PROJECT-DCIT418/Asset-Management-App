@@ -50,12 +50,19 @@ const ProfileText = styled.div`
   flex-direction: column;
   font-family: 'Montserrat', sans-serif;
 `;
+const Logo = styled.img`
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 8px; 
+`
 
 const Navbar = () => {
   return (
     <NavbarContainer>
       <MenuContainer mode="horizontal" defaultSelectedKeys={['1']}>
-      <Menu.Item key="1"><Link to="/items">Items</Link></Menu.Item>
+        <Menu.Item><Link to="/items"><Logo src='/icons/gbc_logo.svg' alt="Settings Icon" /></Link></Menu.Item>
+        <Menu.Item key="1"><Link to="/items">Items</Link></Menu.Item>
         <Menu.Item key="2"><Link to="/collections">Collections</Link></Menu.Item>
         <Menu.Item key="3"><Link to="/locations">Locations</Link></Menu.Item>
         <Menu.Item key="4"><Link to="/reminders">Reminders</Link></Menu.Item>
