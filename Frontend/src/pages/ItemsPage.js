@@ -59,8 +59,8 @@ const ItemsPage = () => {
   return (
     <div>
       <ItemsNavBox addItem={addItem} />
-      <CollectionFilter filterItemsByCollection={filterItemsByCollection} />
-      <LocationFilter filterItemsByLocation={filterItemsByLocation} />
+      {/* <CollectionFilter filterItemsByCollection={filterItemsByCollection} />
+      <LocationFilter filterItemsByLocation={filterItemsByLocation} /> */}
       <ItemList items={filteredItems} />
     </div>
   );

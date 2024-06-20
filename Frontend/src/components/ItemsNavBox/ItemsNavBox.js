@@ -74,8 +74,8 @@ const ItemsNavBox = ({ addItem }) => {
       <Heading>Items</Heading>
       <NavList className='NavBoxlist'>
         <NavItem><div>All Items</div><div>{itemCount}</div></NavItem>
-        <NavItem><div>Tagged Items</div><div>{/* Update with actual count */}</div></NavItem>
-        <NavItem><div>Untagged Items</div><div>{/* Update with actual count */}</div></NavItem>
+        <NavItem><div>Tagged Items</div><div>{/* None for now */}</div></NavItem>
+        <NavItem><div>Untagged Items</div><div>{/* None for now */}</div></NavItem>
       </NavList>
       <Button onClick={handleButtonClick}>Add New Item</Button>
       {isPopupVisible && (
