@@ -77,7 +77,7 @@ const SaveButton = styled.button`
    border-radius: 10px;
    background: rgba(162, 162, 162, 0.54);
    color: #fff;
-   padding: 0.4em 0.6em;
+   padding: 0.4em 1em;
    margin-left: 0em;
    border: none;
    cursor: pointer;
