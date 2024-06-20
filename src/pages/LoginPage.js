@@ -1,14 +1,13 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import './LoginPage.css';
-const LoginPage = () => {
 
+const LoginPage = ({ onLogin }) => {
   const [formData, setFormData] = useState({
-
     id: '',
     password: '',
   });
 
-  const [errors,setErrors] = useState({})
+  const [errors, setErrors] = useState({});
 
   const validateField = (name, value) => {
     let errorMsg = '';
@@ -35,44 +34,36 @@ const LoginPage = () => {
     }));
   };
 
-
   const handleChange = (e) => {
-    const {name, value} = e.target;
+    const { name, value } = e.target;
     setFormData({
-      ...formData, [name] : value
+      ...formData, [name]: value
     });
     validateField(name, value);
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     const validationErrors = {};
-
-    if(!formData.id.trim()) {
-      validationErrors.id= "Staff ID must be provided."
+    if (!formData.id.trim()) {
+      validationErrors.id = "Staff ID must be provided.";
     } else if (formData.id.trim().length < 12) {
-      validationErrors.id = "It must be more than 12 letters"
+      validationErrors.id = "It must be more than 12 letters";
     }
     if (!formData.password.trim()) {
-      validationErrors.password= "Password must contain letters, symbols and numbers"
-    }else if(formData.password.length < 8){
-      validationErrors.password = "Password should be at least 8 characters"
+      validationErrors.password = "Password must contain letters, symbols and numbers";
+    } else if (formData.password.length < 8) {
+      validationErrors.password = "Password should be at least 8 characters";
     }
-
     setErrors(validationErrors);
-
-    if(Object.keys(validationErrors).length === 0) {
-      alert("Form Submitted Successfully");
+    if (Object.keys(validationErrors).length === 0) {
+      onLogin(); // Call the onLogin prop when form is successfully submitted
     }
-
-
   };
 
   return (
     <div className='wrapper'>
-      {/*<form action=''>*/}
       <form onSubmit={handleSubmit}>
-       
         <h1>Welcome Back!</h1>
         <h4>Please enter your credentials to sign in</h4>
         <div className="input-box">
@@ -86,7 +77,6 @@ const LoginPage = () => {
             onChange={handleChange} 
           /> 
           {errors.id && <span className="error">{errors.id}</span>}
-           
         </div>
         <div className="input-box">
           <label> Password </label>
@@ -95,23 +85,19 @@ const LoginPage = () => {
             name="password" 
             placeholder='Password' 
             required
+            value={formData.password}
             onChange={handleChange} 
-            /> 
-            {errors.password && <span className="error">{errors.password}</span>}
+          /> 
+          {errors.password && <span className="error">{errors.password}</span>}
         </div>
-
         <div className="remember-forgot">
-          <label> <input type="checkbox"/>  Remember me</label>
+          <label> <input type="checkbox"/> Remember me</label>
           <a href="#">Forgot password?</a>
         </div>
-
         <button type="submit">Login</button>
-
-        
       </form>
     </div>
-    
   );
 };
 
-export default LoginPage
+export default LoginPage;
