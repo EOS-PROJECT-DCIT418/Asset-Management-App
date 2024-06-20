@@ -14,6 +14,9 @@ class LocationSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class ItemSerializer(serializers.ModelSerializer):
+    collection = CollectionSerializer()
+    location = LocationSerializer()
+
     class Meta:
         model = Item
         fields = ['id', 'name', 'serial_number', 'description', 'collection', 'location']

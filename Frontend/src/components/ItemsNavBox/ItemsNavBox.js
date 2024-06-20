@@ -10,19 +10,29 @@ const ItemsNavBox = ({ addItem }) => {
   const [collection, setCollection] = useState(2); // Default to Collection 2
   const [location, setLocation] = useState(1); // Default to Location 1
   const [itemCount, setItemCount] = useState(0);
+  const [collections, setCollections] = useState([]);
+  const [locations, setLocations] = useState([]);
 
-  // Fetch the current item count when the component mounts
+  // Fetch the current item count and other data when the component mounts
   useEffect(() => {
-    const fetchItemCount = async () => {
+    const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:8000/api/items/count/');
-        setItemCount(response.data.count);
+        // Fetch the item count from the API
+        const itemCountResponse = await axios.get('http://localhost:8000/api/items/count/');
+        setItemCount(itemCountResponse.data.count);
+
+        // Fetch collection and location data
+        const collectionsResponse = await axios.get('http://localhost:8000/api/collections/');
+        setCollections(collectionsResponse.data);
+
+        const locationsResponse = await axios.get('http://localhost:8000/api/locations/');
+        setLocations(locationsResponse.data);
       } catch (error) {
-        console.error('Error fetching item count:', error);
+        console.error('Error fetching data:', error);
       }
     };
 
-    fetchItemCount();
+    fetchData();
   }, []);
 
   const handleButtonClick = () => {
@@ -63,7 +73,7 @@ const ItemsNavBox = ({ addItem }) => {
     <Container>
       <Heading>Items</Heading>
       <NavList className='NavBoxlist'>
-        <NavItem><div>All Items</div><div>{/* Update with actual count */}</div></NavItem>
+        <NavItem><div>All Items</div><div>{itemCount}</div></NavItem>
         <NavItem><div>Tagged Items</div><div>{/* Update with actual count */}</div></NavItem>
         <NavItem><div>Untagged Items</div><div>{/* Update with actual count */}</div></NavItem>
       </NavList>
@@ -89,15 +99,17 @@ const ItemsNavBox = ({ addItem }) => {
               <label>
                 Select Collection:
                 <select value={collection} onChange={(e) => setCollection(parseInt(e.target.value))}>
-                  <option value={1}>Sony Cam Recorders</option>
-                  <option value={2}>Miscellaneous</option>
+                  {collections.map(c => (
+                    <option key={c.id} value={c.id}>{c.name}</option>
+                  ))}
                 </select>
               </label>
               <label>
                 Select Location:
                 <select value={location} onChange={(e) => setLocation(parseInt(e.target.value))}>
-                  <option value={1}>Accra</option>
-                  <option value={2}>Kumasi</option>
+                  {locations.map(l => (
+                    <option key={l.id} value={l.id}>{l.name}</option>
+                  ))}
                 </select>
               </label>
               <button type="submit">Submit</button>

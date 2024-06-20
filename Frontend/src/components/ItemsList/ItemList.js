@@ -18,8 +18,8 @@ const ItemList = ({ items }) => {
             <TableRow key={item.id}>
               <TableCell>{item.name}</TableCell>
               <TableCell>{item.serial_number}</TableCell>
-              <TableCell>{item.collection}</TableCell>
-              <TableCell>{item.location}</TableCell>
+              <TableCell>{item.collection.name}</TableCell>
+              <TableCell>{item.location.location}</TableCell>
             </TableRow>
           ))}
         </TableBody>
