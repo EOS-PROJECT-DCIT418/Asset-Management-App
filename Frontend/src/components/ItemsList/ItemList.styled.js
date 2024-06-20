@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 
+
 export const Container = styled.div`
   position: absolute;
   left: 21.75rem;
@@ -10,6 +11,7 @@ export const Container = styled.div`
   border-radius: 11px;
   padding: 1rem;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+  overflow: auto; /* Add scroll if content overflows */
 `;
 
 export const Table = styled.table`
@@ -17,20 +19,23 @@ export const Table = styled.table`
   border-collapse: collapse;
 `;
 
-export const TableHeader = styled.th`
-  background-color: #f2f2f2;
-  padding: 10px;
-  border: 1px solid #ddd;
-  text-align: left;
-`;
-
 export const TableRow = styled.tr`
   &:nth-child(even) {
-    background-color: #f9f9f9;
+    background-color: #f2f2f2;
   }
 `;
 
-export const TableData = styled.td`
-  padding: 10px;
+export const TableHeader = styled.th`
   border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+  background-color: #EFC000;
+  color: white;
 `;
+
+export const TableCell = styled.td`
+  border: 1px solid #ddd;
+  padding: 8px;
+`;
+
+export const TableBody = styled.tbody``;
