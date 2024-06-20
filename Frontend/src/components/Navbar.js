@@ -63,14 +63,14 @@ const Navbar = () => {
       <MenuContainer mode="horizontal" defaultSelectedKeys={['1']}>
         <Menu.Item><Link to="/items"><Logo src='/icons/gbc_logo.svg' alt="Settings Icon" /></Link></Menu.Item>
         <Menu.Item key="1"><Link to="/items">Items</Link></Menu.Item>
-        <Menu.Item key="2"><Link to="/collections">Collections</Link></Menu.Item>
+        {/* <Menu.Item key="2"><Link to="/collections">Collections</Link></Menu.Item>
         <Menu.Item key="3"><Link to="/locations">Locations</Link></Menu.Item>
-        <Menu.Item key="4"><Link to="/reminders">Reminders</Link></Menu.Item>
+        <Menu.Item key="4"><Link to="/reminders">Reminders</Link></Menu.Item> */}
         <Menu.Item key="5"><Link to="/bookings">Bookings</Link></Menu.Item>
-        <Menu.Item key="6"><Link to="/issues">Issues</Link></Menu.Item>
+        {/* <Menu.Item key="6"><Link to="/issues">Issues</Link></Menu.Item>
         <Menu.Item key="7"><Link to="/devices">Devices</Link></Menu.Item>
         <Menu.Item key="8"><Link to="/reports">Reports</Link></Menu.Item>
-        <Menu.Item key="9"><Link to="/users">Users</Link></Menu.Item>
+        <Menu.Item key="9"><Link to="/users">Users</Link></Menu.Item> */}
       </MenuContainer>
       <ProfileContainer>
         <IconImage src='/icons/settings.svg' alt="Settings Icon" />
