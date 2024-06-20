@@ -27,6 +27,7 @@ class Item(models.Model):
     description = models.TextField(blank=True, null=True)
     collection = models.ForeignKey(Collection, related_name='items',on_delete=models.CASCADE, default=1)
     location = models.ForeignKey(Location, on_delete=models.CASCADE, default=10)
+    available = models.BooleanField(default=True)
     
     def __str__(self) -> str:
         return self.name
