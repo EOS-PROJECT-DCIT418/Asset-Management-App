@@ -15,17 +15,11 @@ class ItemView(APIView):
     
     def post(self, request):
         serializer = ItemSerializer(data=request.data)
-        if serializer.is_valid(raise_exception=True):
+        if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-# class CollectionViewSet(viewsets.ModelViewSet):
-#     queryset = Collection.objects.all()
-#     serializer_class = CollectionSerializer
-
-# class LocationViewSet(viewsets.ModelViewSet):
-#     queryset = Location.objects.all()
-#     serializer_class = LocationSerializer
 
 class CollectionList(APIView):
     def get(self, request):

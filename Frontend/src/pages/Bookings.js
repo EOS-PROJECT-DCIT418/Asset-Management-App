@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import Sidebar from '../components/bookings/Sidebar';
 import Header from '../components/bookings/Header';
 import MainContent from '../components/bookings/MainContent';
-import Navbar from '../components/Navbar';
+// import Navbar from '../components/Navbar';
 
 const Layout = styled.div`
     display: flex;
@@ -30,15 +30,21 @@ const ContentContainer = styled.div`
 `;
 
 const Bookings = () => {
+  const [status, setStatus] = useState('all');
+
+  const handleFilter = (filterStatus) => {
+    setStatus(filterStatus);
+  }
+
   return (
     <Container>
       <Layout>
         <SidebarContainer>
-          <Sidebar />
+          <Sidebar onFilter={handleFilter} />
         </SidebarContainer>
         <ContentContainer>
           <Header />
-          <MainContent />
+          <MainContent status={status} />
         </ContentContainer>
       </Layout>
     </Container>

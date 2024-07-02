@@ -1,94 +1,100 @@
 import React from 'react';
+import axios from 'axios';
 import styled from 'styled-components';
 
-const SidebarContainer = styled.div`
-  width: 100%;
-  background-color: none;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-`;
-
 const Card = styled.div`
+  margin-bottom: 20px;
   background: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  padding: 15px;
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
 `;
 
 const CardHeader = styled.div`
-  font-size: 18px;
+  padding: 10px 15px;
+  background: #f5f5f5;
   font-weight: bold;
-  margin-bottom: 10px;
 `;
 
 const CardItem = styled.div`
-  margin-bottom: 8px;
-  font-size: 16px;
-  color: #333;
+  padding: 10px 15px;
   cursor: pointer;
-  padding: 10px 5px;
-
   &:hover {
-    background-color: #F3F4F6;
-    color: #000;
-  }
-
-  &:last-child {
-    margin-bottom: 0;
+    background: #f0f0f0;
   }
 `;
 
-const ExportHistoryCardItem = styled(CardItem)`
+const ExportHistoryCardItem = styled.div`
+  padding: 10px 15px;
+  cursor: pointer;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
+  &:hover {
+    background: #f0f0f0;
+  }
 `;
 
 const IconImage = styled.img`
-  width: 22px;
-  height: 22px;
-  margin-right: 5px; 
+  width: 20px;
 `;
 
-const BookingsCard = () => (
+const SidebarContainer = styled.div`
+  width: 250px;
+  padding: 20px;
+  background: #f8f9fa;
+`;
+
+const BookingsCard = ({ onFilter }) => (
   <Card>
     <CardHeader>Bookings</CardHeader>
-    <CardItem>All</CardItem>
-    <CardItem>Booked</CardItem>
-    <CardItem>Checked out</CardItem>
-    <CardItem>Completed</CardItem>
-    <CardItem>Overdue</CardItem>
-    <CardItem>Missed</CardItem>
+    <CardItem onClick={() => onFilter('all')}>All</CardItem>
+    <CardItem onClick={() => onFilter('booked')}>Booked</CardItem>
+    <CardItem onClick={() => onFilter('checked out')}>Checked out</CardItem>
+    <CardItem onClick={() => onFilter('completed')}>Completed</CardItem>
+    <CardItem onClick={() => onFilter('overdue')}>Overdue</CardItem>
+    <CardItem onClick={() => onFilter('missed')}>Missed</CardItem>
   </Card>
 );
 
-const RequestsCard = () => (
+const RequestsCard = ({ onFilter }) => (
   <Card>
     <CardHeader>Requests</CardHeader>
-    <CardItem>Pending Approval</CardItem>
-    <CardItem>Approved Bookings</CardItem>
-    <CardItem>Rejected Bookings</CardItem>
+    <CardItem onClick={() => onFilter('pending')}>Pending Approval</CardItem>
+    <CardItem onClick={() => onFilter('booked')}>Approved Bookings</CardItem>
+    <CardItem onClick={() => onFilter('rejected')}>Rejected Bookings</CardItem>
   </Card>
 );
 
-const ExportHistoryCard = () => (
-  <Card>
-    <ExportHistoryCardItem>
-      Export History <IconImage src='/icons/next.svg' alt="Go Icon" />
-    </ExportHistoryCardItem>
-  </Card>
-);
+const ExportHistoryCard = () => {
+  const handleExportClick = async () => {
+    try {
+      const response = await axios.get('http://localhost:8000/api/bookings/export/', { responseType: 'blob' });
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', 'bookings.xlsx');
+      document.body.appendChild(link);
+      link.click();
+    } catch (error) {
+      console.error('Error exporting history', error);
+    }
+  };
 
-const Sidebar = () => {
+  return (
+    <Card>
+      <ExportHistoryCardItem onClick={handleExportClick}>
+        Export History <IconImage src='/icons/next.svg' alt="Go Icon" />
+      </ExportHistoryCardItem>
+    </Card>
+  );
+};
+
+const Sidebar = ({ onFilter }) => {  // Correctly destructure onFilter here
   return (
     <SidebarContainer>
-      <BookingsCard />
-      <RequestsCard />
+      <BookingsCard onFilter={onFilter} />
+      <RequestsCard onFilter={onFilter} />
       <ExportHistoryCard />
     </SidebarContainer>
   );

@@ -87,7 +87,7 @@ const LoginPage = ({ onLogin }) => {
             <input 
               type="text" 
               name="id" 
-              placeholder='Eg. GCB108976' 
+              placeholder='Eg. GBCS1089761' 
               required 
               value={formData.id}
               onChange={handleChange} 

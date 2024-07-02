@@ -1,5 +1,7 @@
-import React from 'react';
+// maincontent.js
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
 
 const MainContentContainer = styled.div`
   flex: 1;
@@ -24,13 +26,55 @@ const MessageText = styled.div`
   color: #666;
 `;
 
-const MainContent = () => {
+const BookingList = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+`;
+
+const BookingItem = styled.div`
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+`;
+
+const MainContent = ({ status }) => {
+  const [bookings, setBookings] = useState([]);
+
+  useEffect(() => {
+    const fetchBookings = async () => {
+      try {
+        const response = await axios.get(`http://localhost:8000/api/bookings/status/${status}/`);
+        setBookings(response.data);
+      } catch (error) {
+        console.error('Error fetching bookings:', error);
+      }
+    };
+
+    fetchBookings();
+  }, [status]);
+
   return (
     <MainContentContainer>
-      <MessageContainer>
-        <MessageImage src="/icons/bookings.svg" alt="No bookings" />
-        <MessageText>Uh Oh! You have no bookings to display here</MessageText>
-      </MessageContainer>
+      {bookings.length === 0 ? (
+        <MessageContainer>
+          <MessageImage src="/icons/bookings.svg" alt="No bookings" />
+          <MessageText>Uh Oh! You have no bookings to display here</MessageText>
+        </MessageContainer>
+      ) : (
+        <BookingList>
+          {bookings.map(booking => (
+            <BookingItem key={booking.id}>
+              <div>{booking.item.name}</div>
+              <div>{booking.booking_date}</div>
+              <div>{booking.status}</div>
+            </BookingItem>
+          ))}
+        </BookingList>
+      )}
     </MainContentContainer>
   );
 };

@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+// header.js
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import styled from 'styled-components';
 import { DatePicker } from 'antd';
 
@@ -135,6 +137,8 @@ const HeaderButton = styled.button`
 const Header = () => {
   const [isPopupVisible, setPopupVisible] = useState(false);
   const [selectedItem, setSelectedItem] = useState('');
+  const [items, setItems] = useState([]);
+  const [selectedDate, setSelectedDate] = useState(null);
 
   const handleButtonClick = () => {
     setPopupVisible(true);
@@ -148,18 +152,44 @@ const Header = () => {
     setSelectedItem(event.target.value);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
+    try {
+      const response = await axios.post('http://localhost:8000/api/bookings/', {
+        item: selectedItem,
+        booking_date: selectedDate,
+      });
+      if (response.status === 201) {
+        alert('Booking created successfully!');
+        setPopupVisible(false);
+      }
+    } catch (error) {
+      console.error('Error creating booking:', error);
+      alert('Failed to create booking.');
+    }
   };
 
   const onChange = (date, dateString) => {
-    console.log(date, dateString);
+    setSelectedDate(dateString);
   };
+
+  useEffect(() => {
+    const fetchItems = async () => {
+      try {
+        const response = await axios.get('http://localhost:8000/api/items/');
+        console.log("Items fetched:", response.data);
+        setItems(response.data);
+      } catch (error) {
+        console.error('Error fetching items:', error);
+      }
+    };
+    fetchItems();
+  }, []);
 
   return (
     <HeaderContainer>
       <SearchContainer>
-        <IconImage src='/icons/search.svg' alt="Settings Icon" />
+        <IconImage src='/icons/search.svg' alt="Search Icon" />
         <SearchInput type="text" placeholder="Search..." />
       </SearchContainer>
       <div>
@@ -175,12 +205,17 @@ const Header = () => {
             <form onSubmit={handleSubmit}>
               <label>
                 Select Date and Time
-                <DatePicker style={{ width: "40%" }} onChange={onChange} />
+                <DatePicker style={{ width: "100%" }} onChange={onChange} />
               </label>
               <label>
                 Item
-                <select style={{ width: "60%", color:"#BDC0CC", fontSize:"14px" }} value={selectedItem} onChange={handleItemChange}>
+                <select style={{ width: "100%", color:"#BDC0CC", fontSize:"14px" }} value={selectedItem} onChange={handleItemChange}>
                   <option value="">Choose which items to add to your booking.</option>
+                  {items.map(item => (
+                    <option key={item.id} value={item.id}>
+                      {item.name}
+                    </option>
+                  ))}
                 </select>
               </label>
               <button style={{ width: "100px" }} type="submit">Book</button>
