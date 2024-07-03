@@ -3,12 +3,11 @@ import styled from 'styled-components';
 import Sidebar from '../components/bookings/Sidebar';
 import Header from '../components/bookings/Header';
 import MainContent from '../components/bookings/MainContent';
-// import Navbar from '../components/Navbar';
 
 const Layout = styled.div`
-    display: flex;
-    padding: 30px;
-    align-items: stretch;
+  display: flex;
+  padding: 30px;
+  align-items: stretch;
 `;
 
 const Container = styled.div`
@@ -32,9 +31,9 @@ const ContentContainer = styled.div`
 const Bookings = () => {
   const [status, setStatus] = useState('all');
 
-  const handleFilter = (filterStatus) => {
+  const handleFilter = async (filterStatus) => {
     setStatus(filterStatus);
-  }
+  };
 
   return (
     <Container>

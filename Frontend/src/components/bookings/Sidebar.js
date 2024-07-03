@@ -1,5 +1,5 @@
 import React from 'react';
-import axios from 'axios';
+import axios from '../../axiosConfig';
 import styled from 'styled-components';
 
 const Card = styled.div`

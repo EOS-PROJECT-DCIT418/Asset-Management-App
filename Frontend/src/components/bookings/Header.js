@@ -1,6 +1,5 @@
-// header.js
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axios from '../../axiosConfig';  // Make sure the path is correct
 import styled from 'styled-components';
 import { DatePicker } from 'antd';
 
@@ -26,13 +25,13 @@ const PopupForm = styled.div`
   width: 600px;
   display: flex;
   flex-direction: column;
-  align-items: flex-start; /* Align form content to the left */
+  align-items: flex-start;
 
   form {
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    width: 100%; /* Ensure form takes full width */
+    width: 100%;
   }
 
   label {
@@ -69,7 +68,7 @@ const PopupForm = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 100%; /* Ensure header takes full width */
+    width: 100%;
   }
 
   h3 {
@@ -85,7 +84,7 @@ const CloseButton = styled.button`
   font-size: 1rem;
   cursor: pointer;
   color: #EFC000;
-  margin-left: auto; /* Push the close button to the right */
+  margin-left: auto;
 `;
 
 const HeaderContainer = styled.div`

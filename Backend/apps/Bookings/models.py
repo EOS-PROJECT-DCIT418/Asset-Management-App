@@ -1,3 +1,4 @@
+# models.py
 from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import User
@@ -12,13 +13,16 @@ class BookingStatus(models.Model):
 
 class Booking(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='bookings')
-    item = models.ForeignKey(Item, on_delete=models.CASCADE, related_name='bookings')
+    item = models.ForeignKey('Items.Item', on_delete=models.CASCADE, related_name='bookings')
     booking_date = models.DateTimeField()
-    status = models.ForeignKey(BookingStatus, on_delete=models.CASCADE)
+    status = models.ForeignKey('BookingStatus', on_delete=models.CASCADE)
 
     def save(self, *args, **kwargs):
         if not self.pk:
-            pending_status = BookingStatus.objects.get(status_name='pending')
+            pending_status, created = BookingStatus.objects.get_or_create(
+                status_name='pending',
+                defaults={'status_name': 'pending'}
+            )
             self.status = pending_status
             super().save(*args, **kwargs)
             

@@ -1,7 +1,6 @@
-// maincontent.js
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import axios from 'axios';
+import axios from '../../axiosConfig';
 
 const MainContentContainer = styled.div`
   flex: 1;
@@ -47,7 +46,8 @@ const MainContent = ({ status }) => {
   useEffect(() => {
     const fetchBookings = async () => {
       try {
-        const response = await axios.get(`http://localhost:8000/api/bookings/status/${status}/`);
+        const endpoint = status === 'all' ? 'http://localhost:8000/api/bookings/' : `http://localhost:8000/api/bookings/status/${status}/`;
+        const response = await axios.get(endpoint);
         setBookings(response.data);
       } catch (error) {
         console.error('Error fetching bookings:', error);
@@ -70,7 +70,7 @@ const MainContent = ({ status }) => {
             <BookingItem key={booking.id}>
               <div>{booking.item.name}</div>
               <div>{booking.booking_date}</div>
-              <div>{booking.status}</div>
+              <div>{booking.status.status_name}</div>
             </BookingItem>
           ))}
         </BookingList>

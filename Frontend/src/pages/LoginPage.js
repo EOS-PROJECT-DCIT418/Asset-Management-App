@@ -1,6 +1,6 @@
-import axios from 'axios';
+import axios from '../axiosConfig';
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import { useNavigate } from 'react-router-dom';
 import './LoginPage.css';
 
 const LoginPage = ({ onLogin }) => {
@@ -10,7 +10,7 @@ const LoginPage = ({ onLogin }) => {
   });
 
   const [errors, setErrors] = useState({});
-  const navigate = useNavigate(); // Initialize useNavigate
+  const navigate = useNavigate();
 
   const validateField = (name, value) => {
     let errorMsg = '';
@@ -67,6 +67,10 @@ const LoginPage = ({ onLogin }) => {
       try {
         const response = await axios.post('http://localhost:8000/api/login/', formData);
         console.log(response.data);
+
+        // Save the token in local storage
+        localStorage.setItem('token', response.data.token);
+
         onLogin(); // Call the onLogin prop when form is successfully submitted
         navigate('/items'); // Redirect to /items after successful login
       } catch (error) {

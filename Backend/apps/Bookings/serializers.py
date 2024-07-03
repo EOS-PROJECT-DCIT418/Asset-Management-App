@@ -27,4 +27,4 @@ class BookingSerializer(serializers.ModelSerializer):
 class CreateBookingSerializer(serializers.ModelSerializer):
     class Meta:
         model = Booking
-        fields = ['user', 'item', 'booking_date', 'status']
+        fields = ['item', 'booking_date']  # 'user' and 'status' are set automatically

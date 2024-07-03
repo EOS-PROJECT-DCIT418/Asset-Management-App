@@ -1,82 +1,71 @@
-# from django.shortcuts import render, get_object_or_404, redirect
-# from django.http import HttpResponse
-# from .models import Booking, Item
-# from .forms import BookingForm
-# from django.contrib.auth.decorators import login_required
-
-# @login_required
-# def booking_list(request):
-#     bookings = Booking.objects.filter(user=request.user)
-#     return render(request, 'bookings/booking_list.html', {'bookings': bookings})
-
-# @login_required
-# def booking_create(request):
-#     if request.method == 'POST':
-#         form = BookingForm(request.POST)
-#         if form.is_valid():
-#             booking = form.save(commit=False)
-#             booking.user = request.user
-#             booking.save()
-#             return redirect('booking_list')
-#     else:
-#         form = BookingForm()
-#     return render(request, 'bookings/booking_form.html', {'form': form})
-
-# @login_required
-# def booking_detail(request, pk):
-#     booking = get_object_or_404(Booking, pk=pk)
-#     return render(request, 'bookings/booking_detail.html', {'booking': booking})
-
-# @login_required
-# def booking_cancel(request, pk):
-#     booking = get_object_or_404(Booking, pk=pk)
-#     booking.status = 'cancelled'
-#     booking.save()
-#     return redirect('booking_list')
-
-
-# apps/Bookings/views.py
+# views.py
 
 from rest_framework import generics, status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .models import Booking, BookingStatus
 from .serializers import BookingSerializer, BookingStatusSerializer, CreateBookingSerializer
-from django.contrib.auth.models import User
 from rest_framework.permissions import IsAuthenticated
 import pandas as pd
 from django.http import HttpResponse
+import logging
 
-class BookingListCreate(generics.ListCreateAPIView):
-    queryset = Booking.objects.all()
-    permission_classes = [IsAuthenticated]
-    # serializer_class = BookingSerializer
+logger = logging.getLogger(__name__)
 
-    def get_serializer_class(self):
-        if self.request.method == 'POST':
-            return CreateBookingSerializer
-        return BookingSerializer
-
-    def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
-
-class BookingFilterView(generics.ListAPIView):
-    serializer_class = BookingSerializer
+class BookingView(APIView):
     permission_classes = [IsAuthenticated]
 
-    def get_queryset(self):
-        status_name = self.kwargs['status_name']
+    def get(self, request):
+        logger.debug(f"User: {request.user}, Authenticated: {request.user.is_authenticated}")
+        if not request.user.is_authenticated:
+            return Response({"error": "User is not authenticated"}, status=status.HTTP_401_UNAUTHORIZED)
+
+        bookings = Booking.objects.filter(user=request.user)
+        logger.debug(f"Bookings found: {bookings.count()}")
+        serializer = BookingSerializer(bookings, many=True)
+        return Response(serializer.data)
+    
+    def post(self, request):
+        serializer = CreateBookingSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save(user=request.user)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class BookingFilterView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, *args, **kwargs):
+        logger.debug(f"User: {request.user}, Authenticated: {request.user.is_authenticated}")
+        if not request.user.is_authenticated:
+            return Response({"error": "User is not authenticated"}, status=status.HTTP_401_UNAUTHORIZED)
+
+        user = request.user
+        status_name = self.kwargs.get('status_name', 'all')
+
         if status_name == 'all':
-            return Booking.objects.all()
+            bookings = Booking.objects.filter(user=user)
         else:
-            status = BookingStatus.objects.get(status_name=status_name)
-            return Booking.objects.filter(status=status)
+            try:
+                status = BookingStatus.objects.get(status_name=status_name)
+                bookings = Booking.objects.filter(user=user, status=status)
+            except BookingStatus.DoesNotExist:
+                return Response({"error": "Invalid status name"}, status=status.HTTP_400_BAD_REQUEST)
+        
+        logger.debug(f"Bookings found for status '{status_name}': {bookings.count()}")
+        serializer = BookingSerializer(bookings, many=True)
+        return Response(serializer.data)
 
 class ExportBookingsView(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request, *args, **kwargs):
-        bookings = Booking.objects.all()
+        logger.debug(f"User: {request.user}, Authenticated: {request.user.is_authenticated}")
+        if not request.user.is_authenticated:
+            return Response({"error": "User is not authenticated"}, status=status.HTTP_401_UNAUTHORIZED)
+
+        bookings = Booking.objects.filter(user=request.user)
+        logger.debug(f"Total bookings for export: {bookings.count()}")
         data = [
             {
                 "User": booking.user.username,
@@ -88,6 +77,6 @@ class ExportBookingsView(APIView):
         ]
         df = pd.DataFrame(data)
         response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
-        response['Content-Disposition'] = 'attachment; filename="bookings.xlsx"'
+        response['Content-Disposition'] = f'attachment; filename="{request.user.username}_bookings.xlsx"'
         df.to_excel(response, index=False)
         return response
