@@ -90,7 +90,7 @@ const ExportHistoryCard = () => {
   );
 };
 
-const Sidebar = ({ onFilter }) => {  // Correctly destructure onFilter here
+const Sidebar = ({ onFilter }) => {
   return (
     <SidebarContainer>
       <BookingsCard onFilter={onFilter} />

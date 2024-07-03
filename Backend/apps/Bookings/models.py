@@ -1,8 +1,9 @@
-# models.py
 from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import User
+from django.utils.timezone import is_aware, make_naive
 from apps.Items.models import Item
+
 
 
 class BookingStatus(models.Model):
@@ -24,7 +25,11 @@ class Booking(models.Model):
                 defaults={'status_name': 'pending'}
             )
             self.status = pending_status
-            super().save(*args, **kwargs)
+
+        if is_aware(self.booking_date):
+            self.booking_date = make_naive(self.booking_date)
+
+        super().save(*args, **kwargs)
             
     def __str__(self):
         return f'{self.user.username} - {self.item.name} - {self.booking_date}'

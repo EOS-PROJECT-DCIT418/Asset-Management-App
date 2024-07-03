@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from '../../axiosConfig';  // Make sure the path is correct
+import axios from '../../axiosConfig';
 import styled from 'styled-components';
 import { DatePicker } from 'antd';
 
@@ -164,7 +164,7 @@ const Header = () => {
       }
     } catch (error) {
       console.error('Error creating booking:', error);
-      alert('Failed to create booking.');
+      alert('Failed to create booking. Item may already be booked.');
     }
   };
 

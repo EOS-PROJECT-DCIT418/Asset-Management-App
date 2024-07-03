@@ -1,10 +1,8 @@
-# views.py
-
-from rest_framework import generics, status
+from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .models import Booking, BookingStatus
-from .serializers import BookingSerializer, BookingStatusSerializer, CreateBookingSerializer
+from .serializers import BookingSerializer, CreateBookingSerializer
 from rest_framework.permissions import IsAuthenticated
 import pandas as pd
 from django.http import HttpResponse
@@ -70,7 +68,7 @@ class ExportBookingsView(APIView):
             {
                 "User": booking.user.username,
                 "Item": booking.item.name,
-                "Booking Date": booking.booking_date,
+                "Booking Date": booking.booking_date.replace(tzinfo=None),
                 "Status": booking.status.status_name,
             }
             for booking in bookings

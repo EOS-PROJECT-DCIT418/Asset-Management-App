@@ -53,15 +53,6 @@ const ItemsNavBox = ({ addItem }) => {
       name: itemName,
       serial_number: serial_number,
       description: description,
-      // collection: {
-      //   id: parseInt(collection),
-      //   name: selectedCollection ? selectedCollection.name : ''
-      //  }, // Pass a dictionary as expected by backend
-      // location: {
-      //   id: parseInt(location),
-      //   name: selectedLocation ? selectedLocation.name : '',
-      //   city: selectedLocation ? selectedLocation.city : ''
-      //   } // Same as collection
       collection_id: parseInt(collection),
       location_id: parseInt(location),
       available: true
@@ -88,8 +79,8 @@ const ItemsNavBox = ({ addItem }) => {
       <Heading>Items</Heading>
       <NavList className='NavBoxlist'>
         <NavItem><div>All Items</div><div>{itemCount}</div></NavItem>
-        <NavItem><div>Tagged Items</div><div>{/* None for now */}</div></NavItem>
-        <NavItem><div>Untagged Items</div><div>{/* None for now */}</div></NavItem>
+        <NavItem><div>Tagged Items</div><div>None for now</div></NavItem>
+        <NavItem><div>Untagged Items</div><div>None for now</div></NavItem>
       </NavList>
       <Button onClick={handleButtonClick}>Add New Item</Button>
       {isPopupVisible && (
